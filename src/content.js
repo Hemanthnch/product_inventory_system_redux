@@ -3,7 +3,8 @@ import React,{Component} from 'react';
 import { Switch, Route } from "react-router-dom";
 
 import AddProductContainer from './containers/addproductcontainer';
-import HomeContainer from './containers/homecontainer'
+import HomeContainer from './containers/homecontainer';
+import EditProductContainer from './containers/editproductcontainer'
 // import EditProduct from './editproduct';
 
 class Content extends Component {
@@ -18,7 +19,7 @@ class Content extends Component {
                     
                     
                     <Route path='/addproduct' component={AddProductContainer}></Route>
-                    
+                    <Route path='/editproduct' component={EditProductContainer}></Route>
                 </Switch>
             </div>
         );

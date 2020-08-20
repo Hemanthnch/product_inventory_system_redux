@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import deleteProductBroadcast from '../actions/deleteproductbroadcast'
+import editProductBroadcast from '../actions/editproductbroadcast';
 require('./card.css');
 
 class HomeContainer extends Component{
@@ -26,6 +28,13 @@ class HomeContainer extends Component{
 
     //     this.getAllProducts()
     // }
+    // deleteProduct = (id) => {
+    //     this.props.deleteProduct(id)
+    //     this.props.history.push('/')
+    // }
+    editProduct=(id)=>{
+        this.props.history.push('/editproduct/'+id)
+    }
     renderAllProducts = () => {
         let imageStyle = {
             width: '200px',
@@ -48,8 +57,8 @@ class HomeContainer extends Component{
                     <h4>Product Category : {product.productCategory}</h4>
                     
                         <div>
-                            <button onClick={this.editProductWithId} style={{ backgroundColor: "green" }}>Edit</button>
-                            <button onClick={this.deleteCurrentProduct} style={{ float: "right", backgroundColor: "red" }}>Delete</button>
+                            <button onClick={()=>this.editProduct(product.id)} style={{ backgroundColor: "green" }}>Edit</button>
+                            <button onClick={()=>this.props.deleteProduct(product.id)} style={{ float: "right", backgroundColor: "red" }}>Delete</button>
                         </div>
                 </div>
             </div>
@@ -106,4 +115,10 @@ function mapStateToProps(state){
         home:state.home
     }        
 }
-export default connect(mapStateToProps)(HomeContainer);
+function convertPropToEventAndBroadcast(dispatch){
+    return bindActionCreators({
+        deleteProduct: deleteProductBroadcast, 
+        editProduct:editProductBroadcast
+    }, dispatch)
+}
+export default connect(mapStateToProps,convertPropToEventAndBroadcast)(HomeContainer);
