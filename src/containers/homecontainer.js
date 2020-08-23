@@ -33,7 +33,11 @@ class HomeContainer extends Component{
     //     this.props.history.push('/')
     // }
     editProduct=(id)=>{
-        this.props.history.push('/editproduct/'+id)
+        this.setState({ myid: id})
+        this.props.history.push({
+            pathname: '/editproduct',
+            state:{myid: id}
+        })
     }
     renderAllProducts = () => {
         let imageStyle = {

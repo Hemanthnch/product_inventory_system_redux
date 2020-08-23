@@ -7,12 +7,13 @@ class EditProductContainer extends React.Component {
     constructor(props) {
         super(props)
         let product = this.props.product.filter(pro => {
-            return pro.id === parseInt(this.props.match.params.id)
+            return pro.id === this.props.location.state.myid
         })
         console.log(this.props);
         console.log(this.props.location);
         console.log(this.props.location.state);
         this.state = {
+            id:product[0].id,
             productName: product[0].productName,
             productPrice: product[0].productPrice,
             productStock: product[0].productStock,
@@ -73,25 +74,7 @@ class EditProductContainer extends React.Component {
         return true
 
     }
-    // componentWillMount() {
-    //     if (this.props.location.state !== undefined) {
-    //         axios.get('http://localhost:3000/allProducts/' + this.props.location.state.myid)
-    //             .then(response => {
-    //                 console.log(response);
-    //                 this.setState({
-    //                     productName: response.data.productName,
-    //                     productPrice: response.data.productPrice,
-    //                     productStock: response.data.productStock,
-    //                     productDescription: response.data.productDescription,
-    //                     productCategory: response.data.productCategory,
-    //                     productImage: response.data.productImage,
-    //                     id: response.data.id
-    //                 })
-    //             }, error => {
-    //                 console.error(error);
-    //             })
-    //     }
-    // }
+    
     getProductName = (event) => {
         this.setState({ productName: event.target.value })
     }
@@ -140,14 +123,8 @@ class EditProductContainer extends React.Component {
         }
         this.props.sendNewEditProduct(editproduct)
         this.props.history.push('/')
-        // axios.put('http://localhost:3000/allProducts/' + this.state.id, productRequestBody)
-        //     .then(response => {
-        //         console.log(response);
-        //         this.props.history.push('/')
-        //     }, error => {
-        //         console.error(error);
-        //     })
     }
+
     render() {
         const menuitem = {
             color: "black",
@@ -167,13 +144,6 @@ class EditProductContainer extends React.Component {
             border: "15px solid blueviolet"
         };
 
-        // if (this.props.location.state === undefined) {
-        //     return (
-        //         <div>
-        //             <h1>Please go to from home page!!!! </h1>
-        //         </div>
-        //     )
-        // }
         return (
             <div>
 
@@ -225,10 +195,10 @@ class EditProductContainer extends React.Component {
     }
 }
 function convertStoreToProps(store) {
-
+    console.log(store)
     return {
 
-        product: store.editProduct,
+        product: store.home
 
     }
 }

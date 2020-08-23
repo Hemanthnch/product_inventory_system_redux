@@ -4,7 +4,7 @@ import editProductReducer from './editproductreducer';
 
 const allReducers= combineReducers({
     home:HomeReducer,
-    editProduct:editProductReducer
+    
 });
 
 export default allReducers;

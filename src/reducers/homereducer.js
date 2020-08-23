@@ -64,6 +64,7 @@ const homeReducer = function allProductsReducer(state = null, action) {
         })
         return allProducts
     case "EDIT_PRODUCT":
+      console.log(action.payload)
       for(var i in state){
         if(parseInt(action.payload.id)===state[i].id){
           state[i].productName=action.payload.productName
