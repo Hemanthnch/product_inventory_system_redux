@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import deleteProductBroadcast from '../actions/deleteproductbroadcast'
-import editProductBroadcast from '../actions/editproductbroadcast';
+import editProductBroadcast from '../actions/editproductbroadcast'
+import getSearchBroadcast from '../actions/getsearchbroadcast'
 require('./card.css');
 
-class HomeContainer extends Component{
+class HomeContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -32,11 +33,11 @@ class HomeContainer extends Component{
     //     this.props.deleteProduct(id)
     //     this.props.history.push('/')
     // }
-    editProduct=(id)=>{
-        this.setState({ myid: id})
+    editProduct = (id) => {
+        this.setState({ myid: id })
         this.props.history.push({
             pathname: '/editproduct',
-            state:{myid: id}
+            state: { myid: id }
         })
     }
     renderAllProducts = () => {
@@ -46,34 +47,33 @@ class HomeContainer extends Component{
             borderRadius: '10px',
             float: 'center'
         }
-        
         return this.props.home.map(product => {
             return (
                 <div class="column">
-                <div class="card">
+                    <div class="card">
 
-                    <img src={product.productImage} style={imageStyle}></img>
-                    <h4>Id :  {product.id}</h4>
-                    <h4 >Product Name :  {product.productName}</h4>
-                    <h4>Product Price : {product.productPrice}</h4>
-                    <h4>Product Stock : {product.productStock}</h4>
-                    <h4>Product Description : {product.productDescription}</h4>
-                    <h4>Product Category : {product.productCategory}</h4>
-                    
+                        <img src={product.productImage} style={imageStyle}></img>
+                        <h4>Id :  {product.id}</h4>
+                        <h4 >Product Name :  {product.productName}</h4>
+                        <h4>Product Price : {product.productPrice}</h4>
+                        <h4>Product Stock : {product.productStock}</h4>
+                        <h4>Product Description : {product.productDescription}</h4>
+                        <h4>Product Category : {product.productCategory}</h4>
+
                         <div>
-                            <button onClick={()=>this.editProduct(product.id)} style={{ backgroundColor: "green" }}>Edit</button>
-                            <button onClick={()=>this.props.deleteProduct(product.id)} style={{ float: "right", backgroundColor: "red" }}>Delete</button>
+                            <button onClick={() => this.editProduct(product.id)} style={{ backgroundColor: "green" }}>Edit</button>
+                            <button onClick={() => this.props.deleteProduct(product.id)} style={{ float: "right", backgroundColor: "red" }}>Delete</button>
                         </div>
+                    </div>
                 </div>
-            </div>
             );
         })
-
     }
     openAddProduct = () => {
         this.props.history.push('/addproduct')
     }
-    render(){
+
+    render() {
         const topnav = {
             backgroundColor: "#333",
             overflow: "hidden",
@@ -82,17 +82,18 @@ class HomeContainer extends Component{
             font: "17px",
             float: "center"
         }
-        
-        return(
+
+        return (
             <div>
                 {/* <NavigationBar></NavigationBar> */}
-                {/* <div>
+                <div>
                     <label>Search : </label>
-                    <input type="text" onChange={this.getSearch}></input>
-                </div> */}
+                    <input type="text" placeholder="Search Here....." onChange={(e) => this.props.getSearch(e.target.value)}></input>
+                </div>
+                {/* <input type="text"  placeholder="Search Products Here" name="search" onChange={(event) => this.props.getsearch(event.target.value)}></input> */}
                 <br></br>
-                
-                    <button onClick={this.openAddProduct} style={topnav}>Add Product</button>
+
+                <button onClick={this.openAddProduct} style={topnav}>Add Product</button>
                 <br></br>
                 <br></br>
 
@@ -112,17 +113,18 @@ class HomeContainer extends Component{
             </div>
         );
     }
-    
+
 }
-function mapStateToProps(state){
-    return{
-        home:state.home
-    }        
+function mapStateToProps(state) {
+    return {
+        home: state.home
+    }
 }
-function convertPropToEventAndBroadcast(dispatch){
+function convertPropToEventAndBroadcast(dispatch) {
     return bindActionCreators({
-        deleteProduct: deleteProductBroadcast, 
-        editProduct:editProductBroadcast
+        deleteProduct: deleteProductBroadcast,
+        editProduct: editProductBroadcast,
+        getSearch: getSearchBroadcast
     }, dispatch)
 }
-export default connect(mapStateToProps,convertPropToEventAndBroadcast)(HomeContainer);
+export default connect(mapStateToProps, convertPropToEventAndBroadcast)(HomeContainer);

@@ -76,6 +76,12 @@ const homeReducer = function allProductsReducer(state = null, action) {
         }
       }
       return state;
+
+      case "SEARCH_PRODUCT":
+      allProducts = allProducts.filter((product) => {
+        return ((product.productName.toLowerCase().includes(action.payload)) || (product.productCategory.toLowerCase().includes(action.payload)) )
+      })
+      return allProducts;
   }
 
   return allProducts
