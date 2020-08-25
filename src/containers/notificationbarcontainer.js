@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-
+import { withRouter } from "react-router-dom"
 
 class NotificationBarContainer extends React.Component {
 
@@ -12,12 +10,15 @@ class NotificationBarContainer extends React.Component {
         }
     }
 
-
+    getButtonClicked=()=>{
+        this.props.history.push('/')
+    }
+    
     render() {
         let loggedIn = localStorage.getItem("loggedIn")
         const menuitem = {
             color: "black",
-            backgroundColor: "cyan",
+            backgroundColor: "blue",
 
             display: 'inline',
             padding: '5px',
@@ -31,23 +32,18 @@ class NotificationBarContainer extends React.Component {
             color: "#f2f2f2",
             font: "17px"
         }
-
+            
 
 
         return (
 
-
-
             <div style={topnav}>
                 <h1 style={{ color: "black" }}>Product Inventory System</h1>
+                <h3 style={menuitem}>
+                    <button type="button" onClick={this.getButtonClicked} >Home</button>
+                </h3>
                 
             </div>
-
-
-
-
-
-
         );
 
 
@@ -55,4 +51,4 @@ class NotificationBarContainer extends React.Component {
 
 }
 
-export default NotificationBarContainer;
+export default withRouter(NotificationBarContainer);

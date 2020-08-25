@@ -7,8 +7,9 @@ import NotificationBarContainer from '../containers/notificationbarcontainer'
 
 const App =()=>(
     <div className="App">
-        <NotificationBarContainer></NotificationBarContainer>
+       
         <HashRouter>
+        <NotificationBarContainer></NotificationBarContainer>
         <Content></Content></HashRouter>
         
         {/* <HomeContainer></HomeContainer> */}

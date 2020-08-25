@@ -2,6 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import addProductBroadcast from '../actions/addproductbroadcast'
+require('./addproduct.css');
 // import axios from 'axios';
 // import NavigationBar from './navbar';
 class AddProductContainer extends React.Component {
@@ -153,18 +154,10 @@ class AddProductContainer extends React.Component {
         }
     }
     render() {
-        const mystyle = {
-            color: "Black",
-            backgroundColor: "white",
-            padding: "10px",
-            width: "400px",
-            display: "inline-block",
-            margin: "20px",
-            border: "15px solid blueviolet"
-        };
+        
         return (
             // <div><NavigationBar></NavigationBar>
-                <div style={mystyle}>
+                <div class="mystyle">
 
                     <h3>Add Product Here</h3>
                     <form >
